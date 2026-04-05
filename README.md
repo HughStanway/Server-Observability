@@ -83,6 +83,7 @@ Only Grafana and Prometheus are published to the host, and both are bound to `12
 
    - set `GF_DOMAIN`,
    - set `GF_SERVER_ROOT_URL`,
+   - set `GF_SECURITY_CSRF_TRUSTED_ORIGINS` to the public Grafana URL,
    - set a strong `GF_ADMIN_PASSWORD`.
 
 3. Validate the Compose definition:
@@ -153,6 +154,29 @@ Example upstream target:
 
 Avoid publishing Grafana, Prometheus, or exporter ports on `0.0.0.0`.
 If you never want direct local access to Prometheus, remove its `ports:` mapping entirely and let Grafana talk to it only over the Compose network.
+
+Your reverse proxy must forward the original host and scheme to Grafana. In practice that usually means forwarding:
+
+- `Host`
+- `X-Forwarded-Proto`
+- `X-Forwarded-For`
+- `X-Forwarded-Host`
+
+## Troubleshooting
+
+If every panel shows `origin not allowed`, Grafana is rejecting requests before they reach Prometheus. Check these in order:
+
+1. `GF_SERVER_ROOT_URL` must exactly match the public URL you use in the browser.
+2. `GF_DOMAIN` should match the public hostname.
+3. `GF_SECURITY_CSRF_TRUSTED_ORIGINS` should include the public Grafana URL, for example `https://grafana.example.com`.
+4. Your reverse proxy must preserve or forward the original `Host` header and set `X-Forwarded-Proto` and `X-Forwarded-Host`.
+
+After changing `.env`, restart Grafana with:
+
+```bash
+make down
+make up
+```
 
 ## Process metrics note
 
