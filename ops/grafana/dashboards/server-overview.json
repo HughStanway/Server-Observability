@@ -1077,15 +1077,68 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "sum(namedprocess_namegroup_num_procs{groupname=\"sshd\"}) or vector(0)",
+          "expr": "sum(namedprocess_namegroup_num_procs{groupname=~\"sshd(:.*)?\"}) or vector(0)",
           "legendFormat": "sshd",
           "range": true,
           "refId": "A"
         }
       ],
-      "description": "Current number of running sshd processes.",
+      "description": "Current number of running sshd-related processes, including session-specific sshd groups.",
       "title": "SSHD Processes",
       "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "showPoints": "never"
+          },
+          "mappings": [],
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 50
+      },
+      "id": 23,
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "pluginVersion": "11.6.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "namedprocess_namegroup_num_procs{groupname=~\"sshd(:.*)?\"}",
+          "legendFormat": "{{groupname}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "SSHD Session Groups",
+      "type": "timeseries"
     },
     {
       "datasource": {
@@ -1222,8 +1275,8 @@
       "gridPos": {
         "h": 8,
         "w": 8,
-        "x": 0,
-        "y": 42
+        "x": 12,
+        "y": 50
       },
       "id": 20,
       "options": {
@@ -1270,8 +1323,8 @@
       "gridPos": {
         "h": 8,
         "w": 8,
-        "x": 8,
-        "y": 42
+        "x": 0,
+        "y": 58
       },
       "id": 21,
       "options": {
@@ -1318,8 +1371,8 @@
       "gridPos": {
         "h": 8,
         "w": 8,
-        "x": 16,
-        "y": 42
+        "x": 8,
+        "y": 58
       },
       "id": 22,
       "options": {
@@ -1347,6 +1400,54 @@
       ],
       "title": "Process Churn (1h)",
       "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-BlPu"
+          },
+          "mappings": [],
+          "unit": "dtdurations"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 58
+      },
+      "id": 24,
+      "options": {
+        "displayMode": "gradient",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "text": {}
+      },
+      "pluginVersion": "11.6.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "topk(10, time() - namedprocess_namegroup_oldest_start_time_seconds)",
+          "legendFormat": "{{groupname}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Oldest Process Groups",
+      "type": "bargauge"
     }
   ],
   "refresh": "30s",
@@ -1365,6 +1466,6 @@
   "timezone": "",
   "title": "Server Overview",
   "uid": "server-overview",
-  "version": 3,
+  "version": 4,
   "weekStart": ""
 }

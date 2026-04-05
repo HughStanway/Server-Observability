@@ -1,5 +1,10 @@
 process_names:
+  - name: "sshd:{{.Matches.Session}}"
+    comm:
+      - sshd
+    cmdline:
+      - 'sshd:\s+(?P<Session>[^ ]+)'
+
   - name: "{{.Comm}}"
     cmdline:
       - '.+'
-
