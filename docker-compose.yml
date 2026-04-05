@@ -67,7 +67,7 @@ services:
       - observability
 
   process-exporter:
-    image: ncabatoff/process-exporter:v0.8.4
+    image: ncabatoff/process-exporter:v0.8.7
     restart: unless-stopped
     command:
       - --procfs
