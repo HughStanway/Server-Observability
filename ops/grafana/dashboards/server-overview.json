@@ -73,7 +73,7 @@
           "values": false
         },
         "showPercentChange": false,
-        "textMode": "value_and_name",
+        "textMode": "value",
         "wideLayout": true
       },
       "pluginVersion": "11.6.0",
@@ -86,6 +86,7 @@
           "refId": "A"
         }
       ],
+      "description": "Average host CPU utilization over the last 5 minutes.",
       "title": "CPU Utilization",
       "type": "stat"
     },
@@ -141,7 +142,7 @@
           "values": false
         },
         "showPercentChange": false,
-        "textMode": "value_and_name",
+        "textMode": "value",
         "wideLayout": true
       },
       "pluginVersion": "11.6.0",
@@ -154,6 +155,7 @@
           "refId": "A"
         }
       ],
+      "description": "Percent of RAM currently in use based on available memory.",
       "title": "Memory Utilization",
       "type": "stat"
     },
@@ -209,7 +211,7 @@
           "values": false
         },
         "showPercentChange": false,
-        "textMode": "value_and_name",
+        "textMode": "value",
         "wideLayout": true
       },
       "pluginVersion": "11.6.0",
@@ -222,6 +224,7 @@
           "refId": "A"
         }
       ],
+      "description": "Current percentage of the root filesystem that is used.",
       "title": "Root Disk Used",
       "type": "stat"
     },
@@ -277,7 +280,7 @@
           "values": false
         },
         "showPercentChange": false,
-        "textMode": "value_and_name",
+        "textMode": "value",
         "wideLayout": true
       },
       "pluginVersion": "11.6.0",
@@ -290,6 +293,7 @@
           "refId": "A"
         }
       ],
+      "description": "Current 1 minute system load average.",
       "title": "Load Average (1m)",
       "type": "stat"
     },
@@ -345,7 +349,7 @@
           "values": false
         },
         "showPercentChange": false,
-        "textMode": "value_and_name",
+        "textMode": "value",
         "wideLayout": true
       },
       "pluginVersion": "11.6.0",
@@ -358,6 +362,7 @@
           "refId": "A"
         }
       ],
+      "description": "Highest currently reported hardware temperature from node_exporter hwmon sensors.",
       "title": "Current Max Temp",
       "type": "stat"
     },
@@ -413,7 +418,7 @@
           "values": false
         },
         "showPercentChange": false,
-        "textMode": "value_and_name",
+        "textMode": "value",
         "wideLayout": true
       },
       "pluginVersion": "11.6.0",
@@ -426,6 +431,7 @@
           "refId": "A"
         }
       ],
+      "description": "Count of systemd units currently in the failed state.",
       "title": "Failed Systemd Units",
       "type": "stat"
     },
@@ -706,7 +712,7 @@
           "values": false
         },
         "showPercentChange": false,
-        "textMode": "value_and_name",
+        "textMode": "value",
         "wideLayout": true
       },
       "pluginVersion": "11.6.0",
@@ -719,6 +725,7 @@
           "refId": "A"
         }
       ],
+      "description": "Elapsed time since the host last booted.",
       "title": "Uptime",
       "type": "stat"
     },
@@ -774,7 +781,7 @@
           "values": false
         },
         "showPercentChange": false,
-        "textMode": "value_and_name",
+        "textMode": "value",
         "wideLayout": true
       },
       "pluginVersion": "11.6.0",
@@ -787,6 +794,7 @@
           "refId": "A"
         }
       ],
+      "description": "Total number of running processes observed by process-exporter across all groups.",
       "title": "Observed Processes",
       "type": "stat"
     },
@@ -997,7 +1005,7 @@
           "values": false
         },
         "showPercentChange": false,
-        "textMode": "value_and_name",
+        "textMode": "value",
         "wideLayout": true
       },
       "pluginVersion": "11.6.0",
@@ -1010,6 +1018,7 @@
           "refId": "A"
         }
       ],
+      "description": "Current number of running Docker daemon processes grouped as dockerd or docker.",
       "title": "Docker Processes",
       "type": "stat"
     },
@@ -1061,7 +1070,7 @@
           "values": false
         },
         "showPercentChange": false,
-        "textMode": "value_and_name",
+        "textMode": "value",
         "wideLayout": true
       },
       "pluginVersion": "11.6.0",
@@ -1074,6 +1083,7 @@
           "refId": "A"
         }
       ],
+      "description": "Current number of running sshd processes.",
       "title": "SSHD Processes",
       "type": "stat"
     },
@@ -1125,7 +1135,7 @@
           "values": false
         },
         "showPercentChange": false,
-        "textMode": "value_and_name",
+        "textMode": "value",
         "wideLayout": true
       },
       "pluginVersion": "11.6.0",
@@ -1138,6 +1148,7 @@
           "refId": "A"
         }
       ],
+      "description": "Current number of running tailscaled processes.",
       "title": "Tailscale Processes",
       "type": "stat"
     },
@@ -1176,7 +1187,7 @@
           "values": false
         },
         "showPercentChange": false,
-        "textMode": "value_and_name",
+        "textMode": "value",
         "wideLayout": true
       },
       "pluginVersion": "11.6.0",
@@ -1189,6 +1200,7 @@
           "refId": "A"
         }
       ],
+      "description": "Current number of running media-related app processes such as Jellyfin, Plex, Sonarr, Radarr, and qBittorrent.",
       "title": "Media App Processes",
       "type": "stat"
     },
