@@ -23,14 +23,16 @@ if ! docker info >/dev/null 2>&1; then
 fi
 
 docker run --rm \
+  --entrypoint promtool \
   -v "${ROOT_DIR}/ops/prometheus:/work:ro" \
   prom/prometheus:v3.2.1 \
-  promtool check config /work/prometheus.yml
+  check config /work/prometheus.yml
 
 docker run --rm \
+  --entrypoint promtool \
   -v "${ROOT_DIR}/ops/prometheus/rules:/work:ro" \
   prom/prometheus:v3.2.1 \
-  promtool check rules /work/host-alerts.yml
+  check rules /work/host-alerts.yml
 
 jq empty "${ROOT_DIR}/ops/grafana/dashboards/server-overview.json"
 echo "grafana dashboard json: ok"
