@@ -472,7 +472,7 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "count_over_time({unit=\"barebones-reverse-proxy.service\"} |= \"ERROR\" [5m]) or on() vector(0)",
+          "expr": "sum(count_over_time({unit=\"barebones-reverse-proxy.service\"} |= \"ERROR\" [5m]) or on() vector(0))",
           "legendFormat": "Errors (5m)",
           "range": true,
           "refId": "A"
