@@ -758,7 +758,7 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "sum by (peer) (count_over_time({unit=\"barebones-reverse-proxy.service\"} |= \"routing_request\" | pattern `<_> peer=<peer> <_>` [5m]))",
+          "expr": "topk(10, sum by (peer) (count_over_time({unit=\"barebones-reverse-proxy.service\"} |= \"routing_request\" | pattern `<_> peer=<peer> <_>` [5m])))",
           "legendFormat": "{{peer}}",
           "range": true,
           "refId": "A"
