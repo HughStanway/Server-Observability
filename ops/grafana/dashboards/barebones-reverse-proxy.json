@@ -17,9 +17,16 @@
   },
   "editable": true,
   "fiscalYearStartMonth": 0,
-  "graphTooltip": 0,
+  "graphTooltip": 1,
   "links": [],
   "panels": [
+    {
+      "collapsed": false,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 0 },
+      "id": 100,
+      "title": "Service Health",
+      "type": "row"
+    },
     {
       "datasource": {
         "type": "prometheus",
@@ -30,45 +37,40 @@
           "color": {
             "mode": "thresholds"
           },
-          "mappings": [],
+          "mappings": [
+            {
+              "options": {
+                "0": { "color": "red", "index": 0, "text": "DOWN" },
+                "1": { "color": "green", "index": 1, "text": "ACTIVE" }
+              },
+              "type": "value"
+            }
+          ],
           "thresholds": {
             "mode": "absolute",
             "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "green",
-                "value": 1
-              }
+              { "color": "red", "value": null },
+              { "color": "green", "value": 1 }
             ]
           },
           "unit": "short"
         },
         "overrides": []
       },
-      "gridPos": {
-        "h": 6,
-        "w": 6,
-        "x": 0,
-        "y": 0
-      },
+      "gridPos": { "h": 5, "w": 4, "x": 0, "y": 1 },
       "id": 1,
       "options": {
-        "colorMode": "background",
+        "colorMode": "background_solid",
         "graphMode": "none",
         "justifyMode": "center",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
         "showPercentChange": false,
-        "textMode": "value_and_name",
+        "textMode": "value",
         "wideLayout": true
       },
       "pluginVersion": "11.6.0",
@@ -76,7 +78,7 @@
         {
           "editorMode": "code",
           "expr": "systemd_unit_state{name=\"barebones-reverse-proxy.service\", state=\"active\"}",
-          "legendFormat": "Active",
+          "legendFormat": "Service Status",
           "range": true,
           "refId": "A"
         }
@@ -91,39 +93,25 @@
       },
       "fieldConfig": {
         "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
+          "color": { "mode": "thresholds" },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
+            "steps": [{ "color": "green", "value": null }]
           },
           "unit": "dtdurations"
         },
         "overrides": []
       },
-      "gridPos": {
-        "h": 6,
-        "w": 6,
-        "x": 6,
-        "y": 0
-      },
+      "gridPos": { "h": 5, "w": 5, "x": 4, "y": 1 },
       "id": 2,
       "options": {
         "colorMode": "value",
-        "graphMode": "area",
+        "graphMode": "none",
         "justifyMode": "center",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
@@ -151,29 +139,17 @@
       },
       "fieldConfig": {
         "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
+          "color": { "mode": "thresholds" },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
+            "steps": [{ "color": "green", "value": null }]
           },
           "unit": "short"
         },
         "overrides": []
       },
-      "gridPos": {
-        "h": 6,
-        "w": 6,
-        "x": 12,
-        "y": 0
-      },
+      "gridPos": { "h": 5, "w": 3, "x": 9, "y": 1 },
       "id": 3,
       "options": {
         "colorMode": "value",
@@ -181,9 +157,7 @@
         "justifyMode": "center",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
@@ -201,7 +175,7 @@
           "refId": "A"
         }
       ],
-      "title": "Process Count",
+      "title": "Processes",
       "type": "stat"
     },
     {
@@ -211,29 +185,17 @@
       },
       "fieldConfig": {
         "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
+          "color": { "mode": "thresholds" },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
+            "steps": [{ "color": "green", "value": null }]
           },
           "unit": "short"
         },
         "overrides": []
       },
-      "gridPos": {
-        "h": 6,
-        "w": 6,
-        "x": 18,
-        "y": 0
-      },
+      "gridPos": { "h": 5, "w": 3, "x": 12, "y": 1 },
       "id": 4,
       "options": {
         "colorMode": "value",
@@ -241,9 +203,7 @@
         "justifyMode": "center",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
@@ -261,7 +221,7 @@
           "refId": "A"
         }
       ],
-      "title": "Active Threads",
+      "title": "Threads",
       "type": "stat"
     },
     {
@@ -271,47 +231,199 @@
       },
       "fieldConfig": {
         "defaults": {
-          "color": {
-            "mode": "palette-classic"
+          "color": { "mode": "thresholds" },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [{ "color": "green", "value": null }]
           },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 5, "w": 3, "x": 15, "y": 1 },
+      "id": 10,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.6.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "namedprocess_namegroup_open_filedesc{groupname=~\"barebones-rever.*\"}",
+          "legendFormat": "Open FDs",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Open FDs",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "loki"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [{ "color": "blue", "value": null }]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 5, "w": 3, "x": 18, "y": 1 },
+      "id": 11,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.6.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "count_over_time({unit=\"barebones-reverse-proxy.service\"} |= \"routing_request\" [5m])",
+          "legendFormat": "Requests (5m)",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Requests (5m)",
+      "description": "Number of routing_request log events in the last 5 minutes.",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "loki"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 1 },
+              { "color": "red", "value": 5 }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 5, "w": 3, "x": 21, "y": 1 },
+      "id": 12,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.6.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "count_over_time({unit=\"barebones-reverse-proxy.service\"} |= \"ERROR\" [5m]) or vector(0)",
+          "legendFormat": "Errors (5m)",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Errors (5m)",
+      "description": "Number of ERROR-level log events in the last 5 minutes.",
+      "type": "stat"
+    },
+    {
+      "collapsed": false,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 6 },
+      "id": 101,
+      "title": "Resource Utilization",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
           "custom": {
             "drawStyle": "line",
             "fillOpacity": 15,
             "lineInterpolation": "smooth",
             "lineWidth": 2,
-            "showPoints": "never"
+            "showPoints": "never",
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "scaleDistribution": { "type": "linear" }
           },
           "mappings": [],
           "unit": "percent"
         },
         "overrides": []
       },
-      "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 0,
-        "y": 6
-      },
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 7 },
       "id": 5,
       "options": {
         "legend": {
           "displayMode": "table",
           "placement": "bottom",
-          "showLegend": true
+          "showLegend": true,
+          "calcs": ["mean", "max"]
         },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "desc"
-        }
+        "tooltip": { "mode": "multi", "sort": "desc" }
       },
       "pluginVersion": "11.6.0",
       "targets": [
         {
           "editorMode": "code",
-          "expr": "rate(namedprocess_namegroup_cpu_seconds_total{groupname=~\"barebones-rever.*\"}[1m]) * 100",
-          "legendFormat": "CPU",
+          "expr": "rate(namedprocess_namegroup_cpu_seconds_total{groupname=~\"barebones-rever.*\", mode=\"user\"}[1m]) * 100",
+          "legendFormat": "User",
           "range": true,
           "refId": "A"
+        },
+        {
+          "editorMode": "code",
+          "expr": "rate(namedprocess_namegroup_cpu_seconds_total{groupname=~\"barebones-rever.*\", mode=\"system\"}[1m]) * 100",
+          "legendFormat": "System",
+          "range": true,
+          "refId": "B"
         }
       ],
       "title": "CPU Utilization",
@@ -324,9 +436,7 @@
       },
       "fieldConfig": {
         "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
+          "color": { "mode": "palette-classic" },
           "custom": {
             "drawStyle": "line",
             "fillOpacity": 15,
@@ -339,32 +449,32 @@
         },
         "overrides": []
       },
-      "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 8,
-        "y": 6
-      },
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 7 },
       "id": 6,
       "options": {
         "legend": {
           "displayMode": "table",
           "placement": "bottom",
-          "showLegend": true
+          "showLegend": true,
+          "calcs": ["mean", "max"]
         },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "desc"
-        }
+        "tooltip": { "mode": "multi", "sort": "desc" }
       },
       "pluginVersion": "11.6.0",
       "targets": [
         {
           "editorMode": "code",
           "expr": "namedprocess_namegroup_memory_bytes{groupname=~\"barebones-rever.*\", memtype=\"resident\"}",
-          "legendFormat": "Resident Memory",
+          "legendFormat": "Resident (RSS)",
           "range": true,
           "refId": "A"
+        },
+        {
+          "editorMode": "code",
+          "expr": "namedprocess_namegroup_memory_bytes{groupname=~\"barebones-rever.*\", memtype=\"virtual\"}",
+          "legendFormat": "Virtual (VSZ)",
+          "range": true,
+          "refId": "B"
         }
       ],
       "title": "Memory Usage",
@@ -377,9 +487,7 @@
       },
       "fieldConfig": {
         "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
+          "color": { "mode": "palette-classic" },
           "custom": {
             "drawStyle": "line",
             "fillOpacity": 15,
@@ -392,23 +500,16 @@
         },
         "overrides": []
       },
-      "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 16,
-        "y": 6
-      },
+      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 7 },
       "id": 9,
       "options": {
         "legend": {
           "displayMode": "table",
           "placement": "bottom",
-          "showLegend": true
+          "showLegend": true,
+          "calcs": ["mean", "max"]
         },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "desc"
-        }
+        "tooltip": { "mode": "multi", "sort": "desc" }
       },
       "pluginVersion": "11.6.0",
       "targets": [
@@ -420,7 +521,7 @@
           "refId": "A"
         }
       ],
-      "title": "Active Threads History",
+      "title": "Active Threads",
       "type": "timeseries"
     },
     {
@@ -430,9 +531,7 @@
       },
       "fieldConfig": {
         "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
+          "color": { "mode": "palette-classic" },
           "custom": {
             "drawStyle": "line",
             "fillOpacity": 15,
@@ -445,23 +544,16 @@
         },
         "overrides": []
       },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 14
-      },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 15 },
       "id": 7,
       "options": {
         "legend": {
           "displayMode": "table",
           "placement": "bottom",
-          "showLegend": true
+          "showLegend": true,
+          "calcs": ["mean", "max"]
         },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "desc"
-        }
+        "tooltip": { "mode": "multi", "sort": "desc" }
       },
       "pluginVersion": "11.6.0",
       "targets": [
@@ -490,9 +582,7 @@
       },
       "fieldConfig": {
         "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
+          "color": { "mode": "palette-classic" },
           "custom": {
             "drawStyle": "line",
             "fillOpacity": 15,
@@ -505,23 +595,16 @@
         },
         "overrides": []
       },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 14
-      },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 15 },
       "id": 8,
       "options": {
         "legend": {
           "displayMode": "table",
           "placement": "bottom",
-          "showLegend": true
+          "showLegend": true,
+          "calcs": ["mean", "max"]
         },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "desc"
-        }
+        "tooltip": { "mode": "multi", "sort": "desc" }
       },
       "pluginVersion": "11.6.0",
       "targets": [
@@ -531,10 +614,197 @@
           "legendFormat": "Open FDs",
           "range": true,
           "refId": "A"
+        },
+        {
+          "editorMode": "code",
+          "expr": "namedprocess_namegroup_worst_fd_ratio{groupname=~\"barebones-rever.*\"}",
+          "legendFormat": "FD Limit Ratio",
+          "range": true,
+          "refId": "B"
         }
       ],
-      "title": "Open File Descriptors",
+      "title": "File Descriptors",
       "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 23 },
+      "id": 102,
+      "title": "Request Traffic (Loki)",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "loki"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": {
+            "drawStyle": "bars",
+            "fillOpacity": 80,
+            "lineWidth": 1,
+            "showPoints": "never",
+            "stacking": { "mode": "normal", "group": "A" }
+          },
+          "mappings": [],
+          "unit": "reqps"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 24 },
+      "id": 20,
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "calcs": ["sum"]
+        },
+        "tooltip": { "mode": "multi", "sort": "desc" }
+      },
+      "pluginVersion": "11.6.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "sum(rate({unit=\"barebones-reverse-proxy.service\"} |= \"routing_request\" [1m]))",
+          "legendFormat": "Requests/s",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Request Rate",
+      "description": "Rate of routing_request log events per second.",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "loki"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": {
+            "drawStyle": "bars",
+            "fillOpacity": 80,
+            "lineWidth": 1,
+            "showPoints": "never",
+            "stacking": { "mode": "normal", "group": "A" }
+          },
+          "mappings": [],
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 24 },
+      "id": 21,
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "calcs": ["sum"]
+        },
+        "tooltip": { "mode": "multi", "sort": "desc" }
+      },
+      "pluginVersion": "11.6.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "sum by (detected_level) (count_over_time({unit=\"barebones-reverse-proxy.service\"} [1m]))",
+          "legendFormat": "{{detected_level}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Log Events by Level",
+      "description": "Log event counts grouped by severity level (INFO, WARN, ERROR).",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "loki"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": {
+            "drawStyle": "bars",
+            "fillOpacity": 80,
+            "lineWidth": 1,
+            "showPoints": "never",
+            "stacking": { "mode": "normal", "group": "A" }
+          },
+          "mappings": [],
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 32 },
+      "id": 22,
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "calcs": ["sum"]
+        },
+        "tooltip": { "mode": "multi", "sort": "desc" }
+      },
+      "pluginVersion": "11.6.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "sum by (peer) (count_over_time({unit=\"barebones-reverse-proxy.service\"} |= \"routing_request\" | pattern `<_> peer=<peer> <_>` [5m]))",
+          "legendFormat": "{{peer}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Requests by Client IP",
+      "description": "Request distribution across client IP addresses extracted from proxy logs.",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 40 },
+      "id": 103,
+      "title": "Live Logs",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "loki"
+      },
+      "gridPos": { "h": 12, "w": 24, "x": 0, "y": 41 },
+      "id": 30,
+      "options": {
+        "dedupStrategy": "none",
+        "enableLogDetails": true,
+        "prettifyLogMessage": false,
+        "showCommonLabels": false,
+        "showLabels": false,
+        "showTime": true,
+        "sortOrder": "Descending",
+        "wrapLogMessage": true
+      },
+      "pluginVersion": "11.6.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "{unit=\"barebones-reverse-proxy.service\"}",
+          "legendFormat": "",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Proxy Logs",
+      "description": "Live log stream from the barebones-reverse-proxy systemd unit.",
+      "type": "logs"
     }
   ],
   "refresh": "10s",
@@ -542,7 +812,8 @@
   "tags": [
     "server",
     "observability",
-    "proxy"
+    "proxy",
+    "loki"
   ],
   "templating": {
     "list": []
