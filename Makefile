@@ -1,6 +1,6 @@
 SHELL := /usr/bin/env bash
 
-.PHONY: help init validate validate-ci up down restart ps logs pull
+.PHONY: help init validate validate-ci up down restart ps logs pull reload
 
 help:
 	@echo "Available targets:"
@@ -40,3 +40,7 @@ logs:
 pull:
 	@git pull --ff-only
 
+reload:
+	@bash scripts/down.sh
+	@git pull
+	@bash scripts/up.sh
