@@ -730,15 +730,19 @@
       },
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "palette-classic" },
-          "custom": {
-            "drawStyle": "bars",
-            "fillOpacity": 80,
-            "lineWidth": 1,
-            "showPoints": "never",
-            "stacking": { "mode": "normal", "group": "A" }
+          "color": {
+            "mode": "continuous-GrYlRd"
           },
           "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
           "unit": "short"
         },
         "overrides": []
@@ -746,27 +750,35 @@
       "gridPos": { "h": 8, "w": 24, "x": 0, "y": 32 },
       "id": 22,
       "options": {
-        "legend": {
-          "displayMode": "table",
-          "placement": "right",
-          "showLegend": true,
-          "calcs": ["sum"]
+        "displayMode": "gradient",
+        "maxVizWidth": 0,
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
         },
-        "tooltip": { "mode": "multi", "sort": "desc" }
+        "showUnfilled": true,
+        "valueMode": "color"
       },
       "pluginVersion": "11.6.0",
       "targets": [
         {
           "editorMode": "code",
-          "expr": "topk(10, sum by (peer) (count_over_time({unit=\"barebones-reverse-proxy.service\"} |= \"routing_request\" | pattern `<_> peer=<peer> <_>` [5m])))",
+          "expr": "topk(10, sum by (peer) (count_over_time({unit=\"barebones-reverse-proxy.service\"} |= \"routing_request\" | pattern `<_> peer=<peer> <_>` [15m])))",
           "legendFormat": "{{peer}}",
-          "range": true,
+          "range": false,
+          "instant": true,
           "refId": "A"
         }
       ],
-      "title": "Requests by Client IP",
-      "description": "Request distribution across client IP addresses extracted from proxy logs.",
-      "type": "timeseries"
+      "title": "Top 10 Active Client IPs (15m)",
+      "description": "Top 10 client IP addresses by request count over the last 15 minutes, parsed dynamically from logs.",
+      "type": "bargauge"
     },
     {
       "collapsed": false,
