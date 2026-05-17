@@ -22,7 +22,12 @@
   "panels": [
     {
       "collapsed": false,
-      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 0 },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
       "id": 100,
       "title": "Service Health",
       "type": "row"
@@ -40,8 +45,16 @@
           "mappings": [
             {
               "options": {
-                "0": { "color": "red", "index": 0, "text": "DOWN" },
-                "1": { "color": "green", "index": 1, "text": "ACTIVE" }
+                "0": {
+                  "color": "red",
+                  "index": 0,
+                  "text": "DOWN"
+                },
+                "1": {
+                  "color": "green",
+                  "index": 1,
+                  "text": "ACTIVE"
+                }
               },
               "type": "value"
             }
@@ -49,15 +62,26 @@
           "thresholds": {
             "mode": "absolute",
             "steps": [
-              { "color": "red", "value": null },
-              { "color": "green", "value": 1 }
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
             ]
           },
           "unit": "short"
         },
         "overrides": []
       },
-      "gridPos": { "h": 5, "w": 4, "x": 0, "y": 1 },
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 0,
+        "y": 1
+      },
       "id": 1,
       "options": {
         "colorMode": "background_solid",
@@ -65,7 +89,9 @@
         "justifyMode": "center",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
@@ -93,17 +119,29 @@
       },
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "thresholds" },
+          "color": {
+            "mode": "thresholds"
+          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
-            "steps": [{ "color": "green", "value": null }]
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
           },
           "unit": "dtdurations"
         },
         "overrides": []
       },
-      "gridPos": { "h": 5, "w": 5, "x": 4, "y": 1 },
+      "gridPos": {
+        "h": 5,
+        "w": 5,
+        "x": 4,
+        "y": 1
+      },
       "id": 2,
       "options": {
         "colorMode": "value",
@@ -111,7 +149,9 @@
         "justifyMode": "center",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
@@ -139,17 +179,29 @@
       },
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "thresholds" },
+          "color": {
+            "mode": "thresholds"
+          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
-            "steps": [{ "color": "green", "value": null }]
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
           },
           "unit": "short"
         },
         "overrides": []
       },
-      "gridPos": { "h": 5, "w": 3, "x": 9, "y": 1 },
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 9,
+        "y": 1
+      },
       "id": 3,
       "options": {
         "colorMode": "value",
@@ -157,7 +209,9 @@
         "justifyMode": "center",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
@@ -185,17 +239,29 @@
       },
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "thresholds" },
+          "color": {
+            "mode": "thresholds"
+          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
-            "steps": [{ "color": "green", "value": null }]
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
           },
           "unit": "short"
         },
         "overrides": []
       },
-      "gridPos": { "h": 5, "w": 3, "x": 12, "y": 1 },
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 12,
+        "y": 1
+      },
       "id": 4,
       "options": {
         "colorMode": "value",
@@ -203,7 +269,9 @@
         "justifyMode": "center",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
@@ -231,17 +299,29 @@
       },
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "thresholds" },
+          "color": {
+            "mode": "thresholds"
+          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
-            "steps": [{ "color": "green", "value": null }]
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
           },
           "unit": "short"
         },
         "overrides": []
       },
-      "gridPos": { "h": 5, "w": 3, "x": 15, "y": 1 },
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 15,
+        "y": 1
+      },
       "id": 10,
       "options": {
         "colorMode": "value",
@@ -249,7 +329,9 @@
         "justifyMode": "center",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
@@ -277,17 +359,29 @@
       },
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "thresholds" },
+          "color": {
+            "mode": "thresholds"
+          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
-            "steps": [{ "color": "blue", "value": null }]
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              }
+            ]
           },
           "unit": "short"
         },
         "overrides": []
       },
-      "gridPos": { "h": 5, "w": 3, "x": 18, "y": 1 },
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 18,
+        "y": 1
+      },
       "id": 11,
       "options": {
         "colorMode": "value",
@@ -295,7 +389,9 @@
         "justifyMode": "center",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
@@ -324,21 +420,37 @@
       },
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "thresholds" },
+          "color": {
+            "mode": "thresholds"
+          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
-              { "color": "green", "value": null },
-              { "color": "yellow", "value": 1 },
-              { "color": "red", "value": 5 }
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 1
+              },
+              {
+                "color": "red",
+                "value": 5
+              }
             ]
           },
           "unit": "short"
         },
         "overrides": []
       },
-      "gridPos": { "h": 5, "w": 3, "x": 21, "y": 1 },
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 21,
+        "y": 1
+      },
       "id": 12,
       "options": {
         "colorMode": "value",
@@ -346,7 +458,9 @@
         "justifyMode": "center",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
@@ -358,7 +472,7 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "count_over_time({unit=\"barebones-reverse-proxy.service\"} |= \"ERROR\" [5m]) or vector(0)",
+          "expr": "count_over_time({unit=\"barebones-reverse-proxy.service\"} |= \"ERROR\" [5m]) or on() vector(0)",
           "legendFormat": "Errors (5m)",
           "range": true,
           "refId": "A"
@@ -370,7 +484,12 @@
     },
     {
       "collapsed": false,
-      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 6 },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 6
+      },
       "id": 101,
       "title": "Resource Utilization",
       "type": "row"
@@ -382,7 +501,9 @@
       },
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "palette-classic" },
+          "color": {
+            "mode": "palette-classic"
+          },
           "custom": {
             "drawStyle": "line",
             "fillOpacity": 15,
@@ -391,23 +512,36 @@
             "showPoints": "never",
             "axisBorderShow": false,
             "axisCenteredZero": false,
-            "scaleDistribution": { "type": "linear" }
+            "scaleDistribution": {
+              "type": "linear"
+            }
           },
           "mappings": [],
           "unit": "percent"
         },
         "overrides": []
       },
-      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 7 },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 7
+      },
       "id": 5,
       "options": {
         "legend": {
           "displayMode": "table",
           "placement": "bottom",
           "showLegend": true,
-          "calcs": ["mean", "max"]
+          "calcs": [
+            "mean",
+            "max"
+          ]
         },
-        "tooltip": { "mode": "multi", "sort": "desc" }
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
       },
       "pluginVersion": "11.6.0",
       "targets": [
@@ -436,7 +570,9 @@
       },
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "palette-classic" },
+          "color": {
+            "mode": "palette-classic"
+          },
           "custom": {
             "drawStyle": "line",
             "fillOpacity": 15,
@@ -449,16 +585,27 @@
         },
         "overrides": []
       },
-      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 7 },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 7
+      },
       "id": 6,
       "options": {
         "legend": {
           "displayMode": "table",
           "placement": "bottom",
           "showLegend": true,
-          "calcs": ["mean", "max"]
+          "calcs": [
+            "mean",
+            "max"
+          ]
         },
-        "tooltip": { "mode": "multi", "sort": "desc" }
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
       },
       "pluginVersion": "11.6.0",
       "targets": [
@@ -487,7 +634,9 @@
       },
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "palette-classic" },
+          "color": {
+            "mode": "palette-classic"
+          },
           "custom": {
             "drawStyle": "line",
             "fillOpacity": 15,
@@ -500,16 +649,27 @@
         },
         "overrides": []
       },
-      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 7 },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 7
+      },
       "id": 9,
       "options": {
         "legend": {
           "displayMode": "table",
           "placement": "bottom",
           "showLegend": true,
-          "calcs": ["mean", "max"]
+          "calcs": [
+            "mean",
+            "max"
+          ]
         },
-        "tooltip": { "mode": "multi", "sort": "desc" }
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
       },
       "pluginVersion": "11.6.0",
       "targets": [
@@ -531,7 +691,9 @@
       },
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "palette-classic" },
+          "color": {
+            "mode": "palette-classic"
+          },
           "custom": {
             "drawStyle": "line",
             "fillOpacity": 15,
@@ -544,16 +706,27 @@
         },
         "overrides": []
       },
-      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 15 },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 15
+      },
       "id": 7,
       "options": {
         "legend": {
           "displayMode": "table",
           "placement": "bottom",
           "showLegend": true,
-          "calcs": ["mean", "max"]
+          "calcs": [
+            "mean",
+            "max"
+          ]
         },
-        "tooltip": { "mode": "multi", "sort": "desc" }
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
       },
       "pluginVersion": "11.6.0",
       "targets": [
@@ -582,7 +755,9 @@
       },
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "palette-classic" },
+          "color": {
+            "mode": "palette-classic"
+          },
           "custom": {
             "drawStyle": "line",
             "fillOpacity": 15,
@@ -595,16 +770,27 @@
         },
         "overrides": []
       },
-      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 15 },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 15
+      },
       "id": 8,
       "options": {
         "legend": {
           "displayMode": "table",
           "placement": "bottom",
           "showLegend": true,
-          "calcs": ["mean", "max"]
+          "calcs": [
+            "mean",
+            "max"
+          ]
         },
-        "tooltip": { "mode": "multi", "sort": "desc" }
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
       },
       "pluginVersion": "11.6.0",
       "targets": [
@@ -628,9 +814,14 @@
     },
     {
       "collapsed": false,
-      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 23 },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 23
+      },
       "id": 102,
-      "title": "Request Traffic (Loki)",
+      "title": "Request Traffic",
       "type": "row"
     },
     {
@@ -640,29 +831,44 @@
       },
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "palette-classic" },
+          "color": {
+            "mode": "palette-classic"
+          },
           "custom": {
             "drawStyle": "bars",
             "fillOpacity": 80,
             "lineWidth": 1,
             "showPoints": "never",
-            "stacking": { "mode": "normal", "group": "A" }
+            "stacking": {
+              "mode": "normal",
+              "group": "A"
+            }
           },
           "mappings": [],
           "unit": "reqps"
         },
         "overrides": []
       },
-      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 24 },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 24
+      },
       "id": 20,
       "options": {
         "legend": {
           "displayMode": "table",
           "placement": "bottom",
           "showLegend": true,
-          "calcs": ["sum"]
+          "calcs": [
+            "sum"
+          ]
         },
-        "tooltip": { "mode": "multi", "sort": "desc" }
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
       },
       "pluginVersion": "11.6.0",
       "targets": [
@@ -685,36 +891,51 @@
       },
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "palette-classic" },
+          "color": {
+            "mode": "palette-classic"
+          },
           "custom": {
             "drawStyle": "bars",
             "fillOpacity": 80,
             "lineWidth": 1,
             "showPoints": "never",
-            "stacking": { "mode": "normal", "group": "A" }
+            "stacking": {
+              "mode": "normal",
+              "group": "A"
+            }
           },
           "mappings": [],
           "unit": "short"
         },
         "overrides": []
       },
-      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 24 },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 24
+      },
       "id": 21,
       "options": {
         "legend": {
           "displayMode": "table",
           "placement": "bottom",
           "showLegend": true,
-          "calcs": ["sum"]
+          "calcs": [
+            "sum"
+          ]
         },
-        "tooltip": { "mode": "multi", "sort": "desc" }
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
       },
       "pluginVersion": "11.6.0",
       "targets": [
         {
           "editorMode": "code",
-          "expr": "sum by (detected_level) (count_over_time({unit=\"barebones-reverse-proxy.service\"} [1m]))",
-          "legendFormat": "{{detected_level}}",
+          "expr": "sum by (level) (count_over_time({unit=\"barebones-reverse-proxy.service\"} | regexp \"\\\\[(?P<level>(INFO|WARN|ERROR|FATAL|DEBUG))\\\\]\" [1m]))",
+          "legendFormat": "{{level}}",
           "range": true,
           "refId": "A"
         }
@@ -724,65 +945,13 @@
       "type": "timeseries"
     },
     {
-      "datasource": {
-        "type": "loki",
-        "uid": "loki"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "continuous-GrYlRd"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 32 },
-      "id": 22,
-      "options": {
-        "displayMode": "gradient",
-        "maxVizWidth": 0,
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": true
-        },
-        "showUnfilled": true,
-        "valueMode": "color"
-      },
-      "pluginVersion": "11.6.0",
-      "targets": [
-        {
-          "editorMode": "code",
-          "expr": "topk(10, sum by (peer) (count_over_time({unit=\"barebones-reverse-proxy.service\"} |= \"routing_request\" | pattern `<_> peer=<peer> <_>` [15m])))",
-          "legendFormat": "{{peer}}",
-          "range": false,
-          "instant": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Top 10 Active Client IPs (15m)",
-      "description": "Top 10 client IP addresses by request count over the last 15 minutes, parsed dynamically from logs.",
-      "type": "bargauge"
-    },
-    {
       "collapsed": false,
-      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 40 },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 32
+      },
       "id": 103,
       "title": "Live Logs",
       "type": "row"
@@ -792,7 +961,12 @@
         "type": "loki",
         "uid": "loki"
       },
-      "gridPos": { "h": 12, "w": 24, "x": 0, "y": 41 },
+      "gridPos": {
+        "h": 12,
+        "w": 24,
+        "x": 0,
+        "y": 33
+      },
       "id": 30,
       "options": {
         "dedupStrategy": "none",
