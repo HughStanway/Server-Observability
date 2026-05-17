@@ -987,7 +987,7 @@
       },
       "gridPos": {
         "h": 6,
-        "w": 6,
+        "w": 4,
         "x": 0,
         "y": 36
       },
@@ -1012,14 +1012,14 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "sum(namedprocess_namegroup_num_procs{groupname=~\"dockerd|docker\"}) or vector(0)",
-          "legendFormat": "dockerd",
+          "expr": "sum(namedprocess_namegroup_num_procs{groupname=~\"containerd-shim.*\"}) or vector(0)",
+          "legendFormat": "containers",
           "range": true,
           "refId": "A"
         }
       ],
-      "description": "Current number of running Docker daemon processes grouped as dockerd or docker.",
-      "title": "Docker Processes",
+      "description": "Current number of running Docker containers counted via containerd-shim processes.",
+      "title": "Docker Containers",
       "type": "stat"
     },
     {
@@ -1052,8 +1052,73 @@
       },
       "gridPos": {
         "h": 6,
-        "w": 6,
-        "x": 6,
+        "w": 4,
+        "x": 4,
+        "y": 36
+      },
+      "id": 25,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.6.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "count(node_network_up{device=~\"br-.*\"}) or vector(0)",
+          "legendFormat": "networks",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "description": "Current number of active Docker bridge networks counted via host bridge interfaces.",
+      "title": "Docker Networks",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 8,
         "y": 36
       },
       "id": 17,
@@ -1077,7 +1142,7 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "sum(namedprocess_namegroup_num_procs{groupname=~\"sshd(:.*)?\"}) or vector(0)",
+          "expr": "sum(namedprocess_namegroup_num_procs{groupname=~\"sshd:.*@.*\"}) or vector(0)",
           "legendFormat": "sshd",
           "range": true,
           "refId": "A"
@@ -1131,7 +1196,7 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "namedprocess_namegroup_num_procs{groupname=~\"sshd(:.*)?\"}",
+          "expr": "namedprocess_namegroup_num_procs{groupname=~\"sshd:.*@.*\"}",
           "legendFormat": "{{groupname}}",
           "range": true,
           "refId": "A"
@@ -1170,7 +1235,7 @@
       },
       "gridPos": {
         "h": 6,
-        "w": 6,
+        "w": 4,
         "x": 12,
         "y": 36
       },
@@ -1222,8 +1287,8 @@
       },
       "gridPos": {
         "h": 6,
-        "w": 6,
-        "x": 18,
+        "w": 8,
+        "x": 16,
         "y": 36
       },
       "id": 19,
