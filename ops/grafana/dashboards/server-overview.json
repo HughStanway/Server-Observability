@@ -1287,7 +1287,7 @@
       },
       "gridPos": {
         "h": 6,
-        "w": 8,
+        "w": 4,
         "x": 16,
         "y": 36
       },
@@ -1320,6 +1320,71 @@
       ],
       "description": "Current number of running media-related app processes such as Jellyfin, Plex, Sonarr, Radarr, and qBittorrent.",
       "title": "Media App Processes",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 20,
+        "y": 36
+      },
+      "id": 26,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.6.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "sum(namedprocess_namegroup_num_procs{groupname=~\"nginx|caddy|traefik|haproxy|apache2|httpd|proxy|barebones-reverse-proxy|barebones-rever\"}) or vector(0)",
+          "legendFormat": "proxy",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "description": "Current number of running web server and reverse proxy processes (Nginx, Caddy, Traefik, custom proxy, etc.).",
+      "title": "Web & Proxy Processes",
       "type": "stat"
     }
   ],
