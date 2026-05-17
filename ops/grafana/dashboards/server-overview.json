@@ -1383,8 +1383,8 @@
           "refId": "A"
         }
       ],
-      "description": "Current number of running web server and reverse proxy processes (Nginx, Caddy, Traefik, custom proxy, etc.).",
-      "title": "Web & Proxy Processes",
+      "description": "Current number of running reverse proxy processes (Nginx, Caddy, Traefik, custom proxy, etc.).",
+      "title": "Proxy Processes",
       "type": "stat"
     }
   ],
