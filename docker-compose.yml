@@ -90,8 +90,11 @@ services:
     image: quay.io/prometheuscommunity/systemd-exporter:v0.6.0
     user: root
     restart: unless-stopped
+    command:
+      - --systemd.collector.enable-restart-count
     volumes:
       - /run/systemd:/run/systemd:ro
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
       - /run/dbus/system_bus_socket:/run/dbus/system_bus_socket:ro
       - /run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket:ro
     networks:
