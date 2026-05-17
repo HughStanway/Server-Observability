@@ -101,7 +101,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./ops/loki/loki-config.yml:/etc/loki/local-config.yaml:ro
-      - loki-data:/tmp/loki
+      - loki-data:/loki
     command: -config.file=/etc/loki/local-config.yaml
     networks:
       - observability
