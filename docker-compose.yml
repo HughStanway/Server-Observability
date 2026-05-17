@@ -88,9 +88,11 @@ services:
 
   systemd-exporter:
     image: quay.io/prometheuscommunity/systemd-exporter:v0.6.0
+    user: root
     restart: unless-stopped
     volumes:
       - /run/dbus/system_bus_socket:/run/dbus/system_bus_socket:ro
+      - /run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket:ro
     networks:
       - observability
 
