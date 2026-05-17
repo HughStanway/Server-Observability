@@ -86,6 +86,14 @@ services:
     networks:
       - observability
 
+  systemd-exporter:
+    image: quay.io/prometheuscommunity/systemd-exporter:v0.6.0
+    restart: unless-stopped
+    volumes:
+      - /run/dbus/system_bus_socket:/run/dbus/system_bus_socket:ro
+    networks:
+      - observability
+
 networks:
   observability:
     name: ${COMPOSE_PROJECT_NAME:-server-observability}

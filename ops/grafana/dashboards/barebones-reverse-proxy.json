@@ -75,7 +75,7 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "node_systemd_unit_state{name=\"barebones-reverse-proxy.service\", state=\"active\"}",
+          "expr": "systemd_unit_state{name=\"barebones-reverse-proxy.service\", state=\"active\"}",
           "legendFormat": "Active",
           "range": true,
           "refId": "A"

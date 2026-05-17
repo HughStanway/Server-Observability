@@ -21,3 +21,8 @@ scrape_configs:
     static_configs:
       - targets:
           - process-exporter:9256
+
+  - job_name: systemd-exporter
+    static_configs:
+      - targets:
+          - systemd-exporter:9558
