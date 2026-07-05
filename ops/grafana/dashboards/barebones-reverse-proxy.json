@@ -403,7 +403,7 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "count_over_time({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"request\" [5m])",
+          "expr": "count_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"request\")[5m])",
           "legendFormat": "Requests (5m)",
           "range": true,
           "refId": "A"
@@ -874,7 +874,7 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "sum(rate({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"request\" [1m]))",
+          "expr": "sum(rate(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"request\")[1m]))",
           "legendFormat": "Requests/s",
           "range": true,
           "refId": "A"
@@ -1113,7 +1113,7 @@
             "uid": "loki"
           },
           "editorMode": "code",
-          "expr": "sum by (status) (count_over_time({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"request\" [5m]))",
+          "expr": "sum by (status) (count_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"request\")[5m]))",
           "legendFormat": "{{status}}",
           "range": true,
           "refId": "A"
@@ -1168,7 +1168,7 @@
             "uid": "loki"
           },
           "editorMode": "code",
-          "expr": "sum by (host) (rate({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"request\" [1m]))",
+          "expr": "sum by (host) (rate(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"request\")[1m]))",
           "legendFormat": "{{host}}",
           "range": true,
           "refId": "A"
