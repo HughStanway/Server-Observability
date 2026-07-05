@@ -1223,7 +1223,7 @@
             "uid": "loki"
           },
           "editorMode": "code",
-          "expr": "sum(rate(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"upgrade_switching_protocols\")[1m]))",
+          "expr": "sum(rate(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"upgrade_switching_protocols\")[1m])) or on() vector(0)",
           "legendFormat": "Upgrade Rate",
           "range": true,
           "refId": "A"
@@ -1266,7 +1266,7 @@
             "uid": "loki"
           },
           "editorMode": "code",
-          "expr": "sum_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"upgrade_tunnel_closed\" | unwrap bytes_to_client | __error__=\"\")[5m]) by (unit)",
+          "expr": "sum_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"upgrade_tunnel_closed\" | unwrap bytes_to_client | __error__=\"\")[5m]) by (unit) or on() vector(0)",
           "legendFormat": "Bytes to Client",
           "range": true,
           "refId": "A"
@@ -1277,7 +1277,7 @@
             "uid": "loki"
           },
           "editorMode": "code",
-          "expr": "sum_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"upgrade_tunnel_closed\" | unwrap bytes_to_upstream | __error__=\"\")[5m]) by (unit)",
+          "expr": "sum_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"upgrade_tunnel_closed\" | unwrap bytes_to_upstream | __error__=\"\")[5m]) by (unit) or on() vector(0)",
           "legendFormat": "Bytes to Upstream",
           "range": true,
           "refId": "B"
@@ -1320,7 +1320,7 @@
             "uid": "loki"
           },
           "editorMode": "code",
-          "expr": "sum(count_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"proxy_protocol_spoof_rejected\")[5m]))",
+          "expr": "sum(count_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"proxy_protocol_spoof_rejected\")[5m])) or on() vector(0)",
           "legendFormat": "Spoofs Rejected",
           "range": true,
           "refId": "A"
@@ -1331,7 +1331,7 @@
             "uid": "loki"
           },
           "editorMode": "code",
-          "expr": "sum(count_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"proxy_protocol_timeout\")[5m]))",
+          "expr": "sum(count_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"proxy_protocol_timeout\")[5m])) or on() vector(0)",
           "legendFormat": "Timeouts",
           "range": true,
           "refId": "B"
@@ -1342,7 +1342,7 @@
             "uid": "loki"
           },
           "editorMode": "code",
-          "expr": "sum(count_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"proxy_protocol_parse_failed\")[5m]))",
+          "expr": "sum(count_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"proxy_protocol_parse_failed\")[5m])) or on() vector(0)",
           "legendFormat": "Parse Failures",
           "range": true,
           "refId": "C"
