@@ -403,14 +403,14 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "count_over_time({unit=\"barebones-reverse-proxy.service\"} |= \"routing_request\" [5m])",
+          "expr": "count_over_time({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"request\" [5m])",
           "legendFormat": "Requests (5m)",
           "range": true,
           "refId": "A"
         }
       ],
       "title": "Requests (5m)",
-      "description": "Number of routing_request log events in the last 5 minutes.",
+      "description": "Number of request log events in the last 5 minutes.",
       "type": "stat"
     },
     {
@@ -874,14 +874,14 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "sum(rate({unit=\"barebones-reverse-proxy.service\"} |= \"routing_request\" [1m]))",
+          "expr": "sum(rate({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"request\" [1m]))",
           "legendFormat": "Requests/s",
           "range": true,
           "refId": "A"
         }
       ],
       "title": "Request Rate",
-      "description": "Rate of routing_request log events per second.",
+      "description": "Rate of request log events per second.",
       "type": "timeseries"
     },
     {
@@ -950,7 +950,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 32
+        "y": 48
       },
       "id": 103,
       "title": "Live Logs",
@@ -965,7 +965,7 @@
         "h": 12,
         "w": 24,
         "x": 0,
-        "y": 33
+        "y": 49
       },
       "id": 30,
       "options": {
@@ -991,6 +991,191 @@
       "title": "Proxy Logs",
       "description": "Live log stream from the barebones-reverse-proxy systemd unit.",
       "type": "logs"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "loki"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "showPoints": "never"
+          },
+          "mappings": [],
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 32
+      },
+      "id": 22,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "editorMode": "code",
+          "expr": "quantile_over_time(0.50, {unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"request\" | unwrap duration_ms [5m])",
+          "legendFormat": "p50 (Median)",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "editorMode": "code",
+          "expr": "quantile_over_time(0.90, {unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"request\" | unwrap duration_ms [5m])",
+          "legendFormat": "p90",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "editorMode": "code",
+          "expr": "quantile_over_time(0.99, {unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"request\" | unwrap duration_ms [5m])",
+          "legendFormat": "p99 (Tail)",
+          "range": true,
+          "refId": "C"
+        }
+      ],
+      "title": "Processing Latency (Percentiles)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "loki"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          }
+        }
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 32
+      },
+      "id": 23,
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "title": "HTTP Response Codes",
+      "type": "piechart",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "editorMode": "code",
+          "expr": "sum by (status) (count_over_time({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"request\" [5m]))",
+          "legendFormat": "{{status}}",
+          "range": true,
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "loki"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "fillOpacity": 15,
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "showPoints": "never"
+          },
+          "mappings": [],
+          "unit": "reqps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 40
+      },
+      "id": 24,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "editorMode": "code",
+          "expr": "sum by (host) (rate({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"request\" [1m]))",
+          "legendFormat": "{{host}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "QPS by Target Host",
+      "type": "timeseries"
     }
   ],
   "refresh": "10s",
