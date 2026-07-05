@@ -1010,8 +1010,8 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 24,
-        "x": 0,
+        "w": 12,
+        "x": 12,
         "y": 32
       },
       "id": 23,
@@ -1096,6 +1096,85 @@
         }
       ],
       "title": "QPS by Target Host",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "loki"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "showPoints": "never"
+          },
+          "mappings": [],
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 32
+      },
+      "id": 22,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "editorMode": "code",
+          "expr": "quantile_over_time(0.50, ({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"request\" | unwrap duration_ms | __error__=\"\")[5m]) by (unit)",
+          "legendFormat": "p50 (Median)",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "editorMode": "code",
+          "expr": "quantile_over_time(0.95, ({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"request\" | unwrap duration_ms | __error__=\"\")[5m]) by (unit)",
+          "legendFormat": "p95",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "editorMode": "code",
+          "expr": "quantile_over_time(0.99, ({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"request\" | unwrap duration_ms | __error__=\"\")[5m]) by (unit)",
+          "legendFormat": "p99 (Tail)",
+          "range": true,
+          "refId": "C"
+        }
+      ],
+      "title": "Processing Latency (Percentiles)",
       "type": "timeseries"
     }
   ],
