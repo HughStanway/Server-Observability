@@ -1535,18 +1535,7 @@
         "y": 63
       },
       "id": 52,
-      "options": {
-        "displayMode": "lcd",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "sum"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true
-      },
+      "options": {},
       "targets": [
         {
           "datasource": {
@@ -1562,7 +1551,7 @@
       ],
       "title": "Top Requested Paths",
       "description": "The most frequently requested URLs/endpoints over the selected time range.",
-      "type": "bargauge"
+      "type": "table"
     },
     {
       "datasource": {
@@ -1584,18 +1573,7 @@
         "y": 71
       },
       "id": 53,
-      "options": {
-        "displayMode": "lcd",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "sum"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true
-      },
+      "options": {},
       "targets": [
         {
           "datasource": {
@@ -1611,7 +1589,7 @@
       ],
       "title": "Top Client IPs",
       "description": "Top unique client IP addresses generating requests to the proxy over the selected time range.",
-      "type": "bargauge"
+      "type": "table"
     },
     {
       "datasource": {
