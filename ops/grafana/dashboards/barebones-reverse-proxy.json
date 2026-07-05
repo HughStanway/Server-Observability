@@ -950,7 +950,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 63
+        "y": 71
       },
       "id": 103,
       "title": "Live Logs",
@@ -965,7 +965,7 @@
         "h": 12,
         "w": 24,
         "x": 0,
-        "y": 64
+        "y": 72
       },
       "id": 30,
       "options": {
@@ -1183,7 +1183,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 54
+        "y": 62
       },
       "id": 105,
       "title": "Client Analytics & Upstreams",
@@ -1213,7 +1213,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 55
+        "y": 63
       },
       "id": 50,
       "targets": [
@@ -1241,7 +1241,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 55
+        "y": 63
       },
       "id": 51,
       "targets": [
@@ -1318,14 +1318,14 @@
             "uid": "loki"
           },
           "editorMode": "code",
-          "expr": "sum(count_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"proxy_protocol_spoof_rejected\")[5m])) or on() vector(0)",
+          "expr": "sum(count_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"proxy_protocol_spoof_rejected\")[$__range])) or on() vector(0)",
           "legendFormat": "Blocked Spoof Attempts",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Blocked IP Spoofs (5m)",
-      "description": "Requests rejected because an untrusted client tried to inject fake proxy headers.",
+      "title": "Blocked IP Spoofs",
+      "description": "Requests rejected because an untrusted client tried to inject fake proxy headers over the selected time range.",
       "type": "stat"
     },
     {
@@ -1378,14 +1378,14 @@
             "uid": "loki"
           },
           "editorMode": "code",
-          "expr": "sum(count_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"proxy_protocol_timeout\")[5m])) or on() vector(0)",
+          "expr": "sum(count_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"proxy_protocol_timeout\")[$__range])) or on() vector(0)",
           "legendFormat": "Handshake Timeouts",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Connection Timeouts (5m)",
-      "description": "Connections dropped because the client timed out while sending headers.",
+      "title": "Connection Timeouts",
+      "description": "Connections dropped because the client timed out while sending headers over the selected time range.",
       "type": "stat"
     },
     {
@@ -1438,14 +1438,14 @@
             "uid": "loki"
           },
           "editorMode": "code",
-          "expr": "sum(count_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"tls_handshake_failed\")[5m])) or on() vector(0)",
+          "expr": "sum(count_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"tls_handshake_failed\")[$__range])) or on() vector(0)",
           "legendFormat": "TLS Failures",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "TLS Handshake Failures (5m)",
-      "description": "Failed secure handshakes, certificate errors, or plain HTTP scans on HTTPS port.",
+      "title": "TLS Handshake Failures",
+      "description": "Failed secure handshakes, certificate errors, or plain HTTP scans on HTTPS port over the selected time range.",
       "type": "stat"
     },
     {
@@ -1494,15 +1494,54 @@
             "uid": "loki"
           },
           "editorMode": "code",
-          "expr": "sum(count_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"upstream_connect_failed\")[5m])) or on() vector(0)",
+          "expr": "sum(count_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"upstream_connect_failed\")[$__range])) or on() vector(0)",
           "legendFormat": "Connection Failures",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Upstream Outages (5m)",
-      "description": "Times the proxy failed to connect to backend upstream services.",
+      "title": "Upstream Outages",
+      "description": "Times the proxy failed to connect to backend upstream services over the selected time range.",
       "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "loki"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 54
+      },
+      "id": 47,
+      "options": {
+        "dedupStrategy": "none",
+        "enableLogDetails": true,
+        "prettifyLogMessage": false,
+        "showCommonLabels": false,
+        "showLabels": false,
+        "showTime": true,
+        "sortOrder": "Descending",
+        "wrapLogMessage": true
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "editorMode": "code",
+          "expr": "{unit=\"barebones-reverse-proxy.service\"} | logfmt | event=~\"proxy_protocol_spoof_rejected|proxy_protocol_timeout|proxy_protocol_parse_failed|tls_handshake_failed|upstream_connect_failed\"",
+          "legendFormat": "",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Security & Outage Event Stream",
+      "description": "Historical audit log containing detailed error contexts, client IPs, and failure reasons.",
+      "type": "logs"
     }
   ],
   "refresh": "10s",
