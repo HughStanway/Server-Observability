@@ -403,14 +403,14 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "count_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"request\")[5m])",
+          "expr": "sum(count_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"request\")[5m]))",
           "legendFormat": "Requests (5m)",
           "range": true,
           "refId": "A"
         }
       ],
       "title": "Requests (5m)",
-      "description": "Number of request log events in the last 5 minutes.",
+      "description": "Total number of request log events in the last 5 minutes.",
       "type": "stat"
     },
     {
@@ -1051,8 +1051,8 @@
             "uid": "loki"
           },
           "editorMode": "code",
-          "expr": "quantile_over_time(0.90, {unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"request\" | unwrap duration_ms [5m])",
-          "legendFormat": "p90",
+          "expr": "quantile_over_time(0.95, {unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"request\" | unwrap duration_ms [5m])",
+          "legendFormat": "p95",
           "range": true,
           "refId": "B"
         },
