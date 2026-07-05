@@ -1040,7 +1040,7 @@
             "uid": "loki"
           },
           "editorMode": "code",
-          "expr": "avg(quantile_over_time(0.50, {unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"request\" | unwrap duration_ms [5m]))",
+          "expr": "avg(quantile_over_time(0.50, ({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"request\" | unwrap duration_ms)[5m]))",
           "legendFormat": "p50 (Median)",
           "range": true,
           "refId": "A"
@@ -1051,7 +1051,7 @@
             "uid": "loki"
           },
           "editorMode": "code",
-          "expr": "avg(quantile_over_time(0.95, {unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"request\" | unwrap duration_ms [5m]))",
+          "expr": "avg(quantile_over_time(0.95, ({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"request\" | unwrap duration_ms)[5m]))",
           "legendFormat": "p95",
           "range": true,
           "refId": "B"
@@ -1062,7 +1062,7 @@
             "uid": "loki"
           },
           "editorMode": "code",
-          "expr": "avg(quantile_over_time(0.99, {unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"request\" | unwrap duration_ms [5m]))",
+          "expr": "avg(quantile_over_time(0.99, ({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"request\" | unwrap duration_ms)[5m]))",
           "legendFormat": "p99 (Tail)",
           "range": true,
           "refId": "C"
