@@ -950,7 +950,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 48
+        "y": 66
       },
       "id": 103,
       "title": "Live Logs",
@@ -965,7 +965,7 @@
         "h": 12,
         "w": 24,
         "x": 0,
-        "y": 49
+        "y": 67
       },
       "id": 30,
       "options": {
@@ -1176,6 +1176,263 @@
       ],
       "title": "Processing Latency (Percentiles)",
       "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 48
+      },
+      "id": 104,
+      "title": "Security & WebSockets",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "loki"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "fillOpacity": 15,
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "showPoints": "never"
+          },
+          "unit": "reqps"
+        }
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 49
+      },
+      "id": 40,
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "editorMode": "code",
+          "expr": "sum(rate(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"upgrade_switching_protocols\")[1m]))",
+          "legendFormat": "Upgrade Rate",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "WebSocket Upgrade Rate",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "loki"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "fillOpacity": 15,
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "showPoints": "never"
+          },
+          "unit": "decbytes"
+        }
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 49
+      },
+      "id": 41,
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "editorMode": "code",
+          "expr": "sum_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"upgrade_tunnel_closed\" | unwrap bytes_to_client | __error__=\"\")[5m]) by (unit)",
+          "legendFormat": "Bytes to Client",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "editorMode": "code",
+          "expr": "sum_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"upgrade_tunnel_closed\" | unwrap bytes_to_upstream | __error__=\"\")[5m]) by (unit)",
+          "legendFormat": "Bytes to Upstream",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "WebSocket Bandwidth (5m Sum)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "loki"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "fillOpacity": 15,
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "showPoints": "never"
+          },
+          "unit": "short"
+        }
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 49
+      },
+      "id": 42,
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "editorMode": "code",
+          "expr": "sum(count_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"proxy_protocol_spoof_rejected\")[5m]))",
+          "legendFormat": "Spoofs Rejected",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "editorMode": "code",
+          "expr": "sum(count_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"proxy_protocol_timeout\")[5m]))",
+          "legendFormat": "Timeouts",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "editorMode": "code",
+          "expr": "sum(count_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"proxy_protocol_parse_failed\")[5m]))",
+          "legendFormat": "Parse Failures",
+          "range": true,
+          "refId": "C"
+        }
+      ],
+      "title": "Blocked Attacks & Parsing Errors",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 57
+      },
+      "id": 105,
+      "title": "Client Analytics & Upstreams",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "loki"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "fillOpacity": 15,
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "showPoints": "never"
+          },
+          "unit": "reqps"
+        }
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 58
+      },
+      "id": 50,
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "editorMode": "code",
+          "expr": "sum by (upstream) (rate(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"request\")[1m]))",
+          "legendFormat": "{{upstream}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "QPS by Upstream Service",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "loki"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 58
+      },
+      "id": 51,
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "editorMode": "code",
+          "expr": "sum by (user_agent) (count_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"request\")[5m]))",
+          "legendFormat": "",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Top Client User Agents (5m)",
+      "type": "table"
     }
   ],
   "refresh": "10s",
