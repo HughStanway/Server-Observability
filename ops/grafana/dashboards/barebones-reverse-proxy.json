@@ -1733,65 +1733,15 @@
             "mode": "palette-classic"
           },
           "custom": {
-            "drawStyle": "bars",
-            "fillOpacity": 80,
-            "lineWidth": 1,
-            "showPoints": "never",
-            "stacking": {
-              "group": "A",
-              "mode": "normal"
-            }
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "lineWidth": 2,
+            "showPoints": "never"
           },
           "mappings": [],
-          "unit": "reqps"
+          "unit": "short"
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Cache HIT"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "green",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Cache MISS (Inserted)"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "orange",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Cache BYPASS"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "blue",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 8,
@@ -1799,11 +1749,12 @@
         "x": 0,
         "y": 85
       },
-      "id": 62,
+      "id": 63,
       "options": {
         "legend": {
           "calcs": [
-            "sum"
+            "max",
+            "last"
           ],
           "displayMode": "table",
           "placement": "bottom",
@@ -1818,28 +1769,21 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "sum(rate(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"cache_hit\")[$__interval]))",
-          "legendFormat": "Cache HIT",
+          "expr": "sum(rate(({unit=\"barebones-reverse-proxy.service\"} | logfmt | unwrap items_evicted)[$__interval]))",
+          "legendFormat": "Evicted Items/s",
           "range": true,
           "refId": "A"
         },
         {
           "editorMode": "code",
-          "expr": "sum(rate(({unit=\"barebones-reverse-proxy.service\"} | logfmt | cache_action=\"inserted\")[$__interval]))",
-          "legendFormat": "Cache MISS (Inserted)",
+          "expr": "sum(rate(({unit=\"barebones-reverse-proxy.service\"} | logfmt | unwrap bytes_evicted)[$__interval]))",
+          "legendFormat": "Evicted Bytes/s",
           "range": true,
           "refId": "B"
-        },
-        {
-          "editorMode": "code",
-          "expr": "sum(rate(({unit=\"barebones-reverse-proxy.service\"} | logfmt | cache_action=\"bypassed\")[$__interval]))",
-          "legendFormat": "Cache BYPASS",
-          "range": true,
-          "refId": "C"
         }
       ],
-      "title": "Cache Operations Rate (HIT / MISS / BYPASS)",
-      "description": "Rate of cache events per second broken down by HIT, MISS, and BYPASS.",
+      "title": "Cache LRU Evictions",
+      "description": "Rate of items and bytes evicted when memory capacity ceiling is reached.",
       "type": "timeseries"
     },
     {
@@ -1904,15 +1848,65 @@
             "mode": "palette-classic"
           },
           "custom": {
-            "drawStyle": "line",
-            "fillOpacity": 10,
-            "lineWidth": 2,
-            "showPoints": "never"
+            "drawStyle": "bars",
+            "fillOpacity": 80,
+            "lineWidth": 1,
+            "showPoints": "never",
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            }
           },
           "mappings": [],
-          "unit": "short"
+          "unit": "reqps"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Cache HIT"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Cache MISS (Inserted)"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Cache BYPASS"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 8,
@@ -1920,12 +1914,11 @@
         "x": 0,
         "y": 93
       },
-      "id": 63,
+      "id": 62,
       "options": {
         "legend": {
           "calcs": [
-            "max",
-            "last"
+            "sum"
           ],
           "displayMode": "table",
           "placement": "bottom",
@@ -1940,21 +1933,28 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "sum(rate(({unit=\"barebones-reverse-proxy.service\"} | logfmt | unwrap items_evicted)[$__interval]))",
-          "legendFormat": "Evicted Items/s",
+          "expr": "sum(rate(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"cache_hit\")[$__interval]))",
+          "legendFormat": "Cache HIT",
           "range": true,
           "refId": "A"
         },
         {
           "editorMode": "code",
-          "expr": "sum(rate(({unit=\"barebones-reverse-proxy.service\"} | logfmt | unwrap bytes_evicted)[$__interval]))",
-          "legendFormat": "Evicted Bytes/s",
+          "expr": "sum(rate(({unit=\"barebones-reverse-proxy.service\"} | logfmt | cache_action=\"inserted\")[$__interval]))",
+          "legendFormat": "Cache MISS (Inserted)",
           "range": true,
           "refId": "B"
+        },
+        {
+          "editorMode": "code",
+          "expr": "sum(rate(({unit=\"barebones-reverse-proxy.service\"} | logfmt | cache_action=\"bypassed\")[$__interval]))",
+          "legendFormat": "Cache BYPASS",
+          "range": true,
+          "refId": "C"
         }
       ],
-      "title": "Cache LRU Evictions",
-      "description": "Rate of items and bytes evicted when memory capacity ceiling is reached.",
+      "title": "Cache Operations Rate (HIT / MISS / BYPASS)",
+      "description": "Rate of cache events per second broken down by HIT, MISS, and BYPASS.",
       "type": "timeseries"
     },
     {
