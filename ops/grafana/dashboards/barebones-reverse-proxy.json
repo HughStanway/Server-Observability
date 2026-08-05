@@ -1643,7 +1643,7 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "sum(rate(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"cache_hit\")[$__interval])) / (sum(rate(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"cache_hit\")[$__interval])) + sum(rate(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"cache_miss\")[$__interval]))) * 100",
+          "expr": "(sum(count_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"cache_hit\")[$__range])) or vector(0)) / ((sum(count_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"cache_hit\")[$__range])) or vector(0)) + (sum(count_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"cache_miss\")[$__range])) or vector(0))) * 100",
           "legendFormat": "Cache Hit Ratio",
           "range": true,
           "refId": "A"
@@ -1712,7 +1712,7 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "sum(rate(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"cache_hit\" | unwrap size_bytes)[$__interval])) / (sum(rate(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"cache_hit\" | unwrap size_bytes)[$__interval])) + sum(rate(({unit=\"barebones-reverse-proxy.service\"} | logfmt | cache_action=\"inserted\" | unwrap bytes_inserted)[$__interval]))) * 100",
+          "expr": "(sum(sum_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"cache_hit\" | unwrap size_bytes)[$__range])) or vector(0)) / ((sum(sum_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"cache_hit\" | unwrap size_bytes)[$__range])) or vector(0)) + (sum(sum_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | cache_action=\"inserted\" | unwrap bytes_inserted)[$__range])) or vector(0))) * 100",
           "legendFormat": "Bandwidth Offloaded Ratio",
           "range": true,
           "refId": "A"
