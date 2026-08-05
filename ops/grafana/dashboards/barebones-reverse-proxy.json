@@ -1617,8 +1617,8 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 6,
-        "w": 6,
+        "h": 5,
+        "w": 12,
         "x": 0,
         "y": 80
       },
@@ -1686,9 +1686,9 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 6,
-        "w": 6,
-        "x": 6,
+        "h": 5,
+        "w": 12,
+        "x": 12,
         "y": 80
       },
       "id": 64,
@@ -1720,144 +1720,6 @@
       ],
       "title": "Bandwidth Offloaded Ratio",
       "description": "Percentage of total static byte traffic saved from upstream by serving from RAM cache.",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "loki",
-        "uid": "loki"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 15
-              },
-              {
-                "color": "red",
-                "value": 40
-              }
-            ]
-          },
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 6,
-        "x": 12,
-        "y": 80
-      },
-      "id": 66,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "center",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "value",
-        "wideLayout": true
-      },
-      "pluginVersion": "11.6.0",
-      "targets": [
-        {
-          "editorMode": "code",
-          "expr": "(sum(count_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | cache_action=\"inserted\" | items_evicted > 0)[$__range])) or vector(0)) / (sum(count_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | cache_action=\"inserted\")[$__range])) or vector(1)) * 100",
-          "legendFormat": "Eviction Ratio",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Cache Eviction Ratio",
-      "description": "Percentage of cache insertions that triggered LRU memory evictions.",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "loki",
-        "uid": "loki"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 5
-              },
-              {
-                "color": "green",
-                "value": 15
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 6,
-        "x": 18,
-        "y": 80
-      },
-      "id": 67,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "center",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "value",
-        "wideLayout": true
-      },
-      "pluginVersion": "11.6.0",
-      "targets": [
-        {
-          "editorMode": "code",
-          "expr": "(sum(avg_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"request\" | upstream != \"-\")[$__interval] | unwrap duration_ms)) or vector(1.0)) / (sum(avg_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"cache_hit\")[$__interval] | unwrap duration_ms)) or vector(0.04))",
-          "legendFormat": "Speedup Multiplier",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Cache Speedup Factor",
-      "description": "Latency speedup factor of RAM cache hits vs upstream requests (e.g. 25x faster).",
       "type": "stat"
     },
     {
