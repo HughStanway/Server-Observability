@@ -1709,16 +1709,27 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "drawStyle": "line",
-            "fillOpacity": 20,
-            "lineWidth": 2,
-            "showPoints": "never"
+            "mode": "thresholds"
           },
           "mappings": [],
-          "unit": "bytes"
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 40
+              },
+              {
+                "color": "green",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percent"
         },
         "overrides": []
       },
@@ -1728,7 +1739,7 @@
         "x": 6,
         "y": 80
       },
-      "id": 61,
+      "id": 64,
       "options": {
         "colorMode": "value",
         "graphMode": "area",
@@ -1749,14 +1760,14 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "max_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | unwrap total_cache_bytes)[$__interval])",
-          "legendFormat": "RAM Usage",
+          "expr": "sum(rate(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"cache_hit\" | unwrap size_bytes)[$__interval])) / (sum(rate(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"cache_hit\" | unwrap size_bytes)[$__interval])) + sum(rate(({unit=\"barebones-reverse-proxy.service\"} | logfmt | cache_action=\"inserted\" | unwrap bytes_inserted)[$__interval]))) * 100",
+          "legendFormat": "Bandwidth Offloaded Ratio",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Cache Memory Footprint",
-      "description": "Current RAM byte footprint of the LRU static asset cache.",
+      "title": "Bandwidth Offloaded Ratio",
+      "description": "Percentage of total static byte traffic saved from upstream by serving from RAM cache.",
       "type": "stat"
     },
     {
@@ -1942,6 +1953,105 @@
       "title": "Cache LRU Evictions",
       "description": "Rate of items and bytes evicted when memory capacity ceiling is reached.",
       "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "loki"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          }
+        }
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 86
+      },
+      "id": 65,
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "11.6.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "editorMode": "code",
+          "expr": "sum by (reason) (count_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | cache_action=\"bypassed\")[$__range]))",
+          "legendFormat": "{{reason}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Cache Bypass Reasons Breakdown",
+      "description": "Distribution of bypass reasons (non_static_asset, cache_control_no_store, exceeds_max_file_size).",
+      "type": "piechart"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 95
+      },
+      "id": 103,
+      "title": "Live Logs",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "loki"
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 24,
+        "x": 0,
+        "y": 96
+      },
+      "id": 30,
+      "options": {
+        "dedupStrategy": "none",
+        "enableLogDetails": true,
+        "prettifyLogMessage": false,
+        "showCommonLabels": false,
+        "showLabels": false,
+        "showTime": true,
+        "sortOrder": "Descending",
+        "wrapLogMessage": true
+      },
+      "pluginVersion": "11.6.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "{unit=\"barebones-reverse-proxy.service\"}",
+          "legendFormat": "",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Proxy Logs",
+      "description": "Live log stream from the barebones-reverse-proxy systemd unit.",
+      "type": "logs"
     }
   ],
   "refresh": "10s",
