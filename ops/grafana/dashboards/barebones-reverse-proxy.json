@@ -1730,6 +1730,144 @@
       "fieldConfig": {
         "defaults": {
           "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 15
+              },
+              {
+                "color": "red",
+                "value": 40
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 12,
+        "y": 80
+      },
+      "id": 66,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.6.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "(sum(count_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | cache_action=\"inserted\" | items_evicted > 0)[$__range])) or vector(0)) / (sum(count_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | cache_action=\"inserted\")[$__range])) or vector(1)) * 100",
+          "legendFormat": "Eviction Ratio",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Cache Eviction Ratio",
+      "description": "Percentage of cache insertions that triggered LRU memory evictions.",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "loki"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 5
+              },
+              {
+                "color": "green",
+                "value": 15
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 18,
+        "y": 80
+      },
+      "id": 67,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.6.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "(sum(avg_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"request\" | upstream != \"-\")[$__interval] | unwrap duration_ms)) or vector(1.0)) / (sum(avg_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | event=\"cache_hit\")[$__interval] | unwrap duration_ms)) or vector(0.04))",
+          "legendFormat": "Speedup Multiplier",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Cache Speedup Factor",
+      "description": "Latency speedup factor of RAM cache hits vs upstream requests (e.g. 25x faster).",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "loki"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
             "mode": "palette-classic"
           },
           "custom": {
@@ -1796,8 +1934,8 @@
       "gridPos": {
         "h": 8,
         "w": 12,
-        "x": 12,
-        "y": 80
+        "x": 0,
+        "y": 85
       },
       "id": 62,
       "options": {
@@ -1849,6 +1987,57 @@
       },
       "fieldConfig": {
         "defaults": {
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          }
+        }
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 85
+      },
+      "id": 65,
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "11.6.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "editorMode": "code",
+          "expr": "sum by (reason) (count_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | cache_action=\"bypassed\")[$__range]))",
+          "legendFormat": "{{reason}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Cache Bypass Reasons Breakdown",
+      "description": "Distribution of bypass reasons (non_static_asset, cache_control_no_store, exceeds_max_file_size).",
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "loki"
+      },
+      "fieldConfig": {
+        "defaults": {
           "color": {
             "mode": "palette-classic"
           },
@@ -1865,9 +2054,9 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 12,
+        "w": 24,
         "x": 0,
-        "y": 86
+        "y": 93
       },
       "id": 63,
       "options": {
@@ -1905,57 +2094,6 @@
       "title": "Cache LRU Evictions",
       "description": "Rate of items and bytes evicted when memory capacity ceiling is reached.",
       "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "loki",
-        "uid": "loki"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "custom": {
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            }
-          }
-        }
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 86
-      },
-      "id": 65,
-      "options": {
-        "legend": {
-          "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single"
-        }
-      },
-      "pluginVersion": "11.6.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "loki",
-            "uid": "loki"
-          },
-          "editorMode": "code",
-          "expr": "sum by (reason) (count_over_time(({unit=\"barebones-reverse-proxy.service\"} | logfmt | cache_action=\"bypassed\")[$__range]))",
-          "legendFormat": "{{reason}}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Cache Bypass Reasons Breakdown",
-      "description": "Distribution of bypass reasons (non_static_asset, cache_control_no_store, exceeds_max_file_size).",
-      "type": "piechart"
     },
     {
       "collapsed": false,
